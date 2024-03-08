@@ -24,7 +24,7 @@ class User(UserBase):
     posts: list[Post]
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 class PostBase(BaseModel):
@@ -34,7 +34,7 @@ class PostBase(BaseModel):
     owner_id: int
 
 
-class CreatePost(PostBase):
+class PostCreate(PostBase):
     pass
 
 
@@ -48,7 +48,7 @@ class Post(BaseModel):
         return len(self.likes)
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 class LikeBase(BaseModel):
@@ -65,4 +65,4 @@ class Like(LikeBase):
     post: Post
 
     class Config:
-        orm_mode = True
+        from_attributes = True

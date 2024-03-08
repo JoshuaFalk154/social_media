@@ -61,7 +61,7 @@ class Post(Base):
     owner_id = Column(Integer, ForeignKey("users.id"), nullable=False)
 
     owner = relationship("User", back_populates="posts")
-    likes = relationship("Like", back_populates="posts")
+    likes = relationship("Like", back_populates="post")
 
 
 class Like(Base):
