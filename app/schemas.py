@@ -21,10 +21,16 @@ class UserCreate(UserBase):
 class User(UserBase):
     id: int
     created_at: datetime
-    posts: list[Post]
+    posts: list[PostMinimal]
 
     class Config:
         from_attributes = True
+
+
+# das wird zum Post als Info über owner zurückgegeben
+class UserMinimal(BaseModel):
+    id: int
+    username: str
 
 
 class PostBase(BaseModel):
@@ -41,7 +47,7 @@ class PostCreate(PostBase):
 class Post(BaseModel):
     id: int
     owner: User
-    likes: list[User] = []
+    likes: list[UserMinimal] = []
 
     @property
     def amount_likes(self) -> int:
@@ -49,6 +55,12 @@ class Post(BaseModel):
 
     class Config:
         from_attributes = True
+
+
+# wird zum User ausgegeben, also wenige Infos pro Post von ihm
+class PostMinimal(BaseModel):
+    id: int
+    title: str
 
 
 class LikeBase(BaseModel):
@@ -66,6 +78,7 @@ class Like(LikeBase):
 
     class Config:
         from_attributes = True
+        orm_mode = True
 
 
 class Token(BaseModel):

@@ -1,19 +1,19 @@
-from fastapi import FastAPI, Depends
+from fastapi import Depends, FastAPI
 
 from . import models, utils
-from .database import SessionLocal, engine, get_db
 from .config import Settings
-from .routers import users, auth
-
+from .database import SessionLocal, engine, get_db
+from .routers import auth, posts, users
 
 # models.Base.metadata.create_all(bind=engine)
 
+
+
+# user444@example.com
 app = FastAPI()
 
-app.include_router(users.router,
-                   prefix="/users",
-                   tags=["users"])
+app.include_router(users.router, prefix="/users", tags=["users"])
 
-app.include_router(auth.router,
-                   tags=["login"])
+app.include_router(auth.router, tags=["login"])
 
+app.include_router(posts.router, prefix="/posts", tags=["posts"])
