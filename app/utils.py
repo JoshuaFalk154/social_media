@@ -17,7 +17,7 @@ def verify_password(plain_password, hashed_password):
 def get_password_hash(password):
     return pwd_context.hash(password)
 
-def get_user_by_id(username: str, db: Session):
+def get_user_by_username(username: str, db: Session):
     db_user = db.query(models.User).filter_by(username=username).first()
     if db_user is None:
         raise HTTPException(
@@ -26,7 +26,14 @@ def get_user_by_id(username: str, db: Session):
     return db_user
 
 
-
+def get_post_by_id(id: int, db: Session):
+    db_user = db.query(models.Post).filter_by(id=id).first()
+    print(db_user)
+    if db_user is None:
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT, detail="Post not found"
+        )
+    return db_user
 
 
 
