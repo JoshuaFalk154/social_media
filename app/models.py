@@ -4,33 +4,6 @@ from sqlalchemy.sql import func
 
 from .database import Base
 
-"""
-CREATE TABLE User (
-	id SERIAL PRIMARY KEY,
-	email VARCHAR(255) NOT NULL,
-	username VARCHAR(40) NOT NULL,
-    hashed_password VARCHAR(255) NOT NULL,
-	created_at TIMESTAMP NOT NULL
-);
-
-CREATE TABLE Post (
-	id SERIAL PRIMARY KEY,
-	owner_id INTEGER NOT NULL,
-	title VARCHAR(40) NOT NULL,
-	content TEXT NOT NULL,  
-	public BOOLEAN NOT NULL DEFAULT TRUE,
-	created_at TIMESTAMP NOT NULL,
-	FOREIGN KEY (owner_id) REFERENCES User(id) ON DELETE CASCADE
-);
-
-CREATE TABLE Like (
-	user_id INTEGER NOT NULL,
-	post_id INTEGER NOT NULL,
-	PRIMARY KEY (user_id, post_id),
-	FOREIGN KEY (user_id) REFERENCES User(id) ON DELETE CASCADE,
-FOREIGN KEY (post_
-"""
-
 
 class User(Base):
     __tablename__ = "users"
@@ -72,3 +45,31 @@ class Like(Base):
 
     liker = relationship("User", back_populates="likes")
     post = relationship("Post", back_populates="likes")
+
+
+"""
+CREATE TABLE User (
+	id SERIAL PRIMARY KEY,
+	email VARCHAR(255) NOT NULL,
+	username VARCHAR(40) NOT NULL,
+    hashed_password VARCHAR(255) NOT NULL,
+	created_at TIMESTAMP NOT NULL
+);
+
+CREATE TABLE Post (
+	id SERIAL PRIMARY KEY,
+	owner_id INTEGER NOT NULL,
+	title VARCHAR(40) NOT NULL,
+	content TEXT NOT NULL,  
+	public BOOLEAN NOT NULL DEFAULT TRUE,
+	created_at TIMESTAMP NOT NULL,
+	FOREIGN KEY (owner_id) REFERENCES User(id) ON DELETE CASCADE
+);
+
+CREATE TABLE Like (
+	user_id INTEGER NOT NULL,
+	post_id INTEGER NOT NULL,
+	PRIMARY KEY (user_id, post_id),
+	FOREIGN KEY (user_id) REFERENCES User(id) ON DELETE CASCADE,
+FOREIGN KEY (post_
+"""

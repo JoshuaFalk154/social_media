@@ -1,6 +1,7 @@
 from fastapi import Depends
 from passlib.context import CryptContext
 from sqlalchemy.orm import Session
+from fastapi import APIRouter, Depends, FastAPI, HTTPException, status
 
 from . import models, schemas
 from .database import get_db
@@ -15,6 +16,17 @@ def verify_password(plain_password, hashed_password):
 
 def get_password_hash(password):
     return pwd_context.hash(password)
+
+def get_user_by_id(username: str, db: Session):
+    db_user = db.query(models.User).filter_by(username=username).first()
+    if db_user is None:
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT, detail="User not found"
+        )
+    return db_user
+
+
+
 
 
 
