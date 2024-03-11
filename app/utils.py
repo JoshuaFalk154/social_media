@@ -28,7 +28,6 @@ def get_user_by_username(username: str, db: Session):
 
 def get_post_by_id(id: int, db: Session):
     db_user = db.query(models.Post).filter_by(id=id).first()
-    print(db_user)
     if db_user is None:
         raise HTTPException(
             status_code=status.HTTP_409_CONFLICT, detail="Post not found"
