@@ -7,7 +7,7 @@ from ..database import SessionLocal, engine, get_db
 router = APIRouter()
 
 
-@router.post("/users", response_model=schemas.User)
+@router.post("", response_model=schemas.User)
 def create_users(user: schemas.UserCreate, db: Session = Depends(get_db)):
 
     db_user = db.query(models.User).filter_by(email=user.email).first()
