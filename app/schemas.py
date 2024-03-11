@@ -44,7 +44,7 @@ class PostCreate(PostBase):
     pass
 
 
-class Post(BaseModel):
+class Post(PostBase):
     id: int
     owner: UserMinimal
     likes: list[UserMinimal] = []
@@ -78,7 +78,7 @@ class Like(LikeBase):
 
     class Config:
         from_attributes = True
-        orm_mode = True
+        # orm_mode = True
 
 
 class Token(BaseModel):
