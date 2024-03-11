@@ -46,7 +46,7 @@ class PostCreate(PostBase):
 
 class Post(BaseModel):
     id: int
-    owner: User
+    owner: UserMinimal
     likes: list[UserMinimal] = []
 
     @property
