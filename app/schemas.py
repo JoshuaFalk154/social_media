@@ -4,6 +4,7 @@ from __future__ import annotations
 from datetime import datetime
 
 from pydantic import BaseModel, EmailStr, Field
+from typing import Literal
 
 
 # Base
@@ -69,12 +70,13 @@ class LikeBase(BaseModel):
 
 
 class LikeCreate(LikeBase):
-    pass
+    direction: Literal[0, 1] # 0 unlike, 1 like
 
 
 class Like(LikeBase):
     liker: User
     post: Post
+    created_at: datetime
 
     class Config:
         from_attributes = True
